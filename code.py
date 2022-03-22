@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-image = cv2.imread('signature.jpg')
+image = cv2.imread('sign.jpg')
 
 nomer = 299
 widthImg = 1170                                                                      
