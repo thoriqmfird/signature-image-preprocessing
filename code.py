@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-image = cv2.imread('ttd-raw/Fetty.jpg')
+image = cv2.imread('signature.jpg')
 
 nomer = 299
 widthImg = 1170                                                                      
