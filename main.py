@@ -30,7 +30,6 @@ def rectify(h):
     diff = np.diff(h,axis=1)
     hnew[1] = h[np.argmin(diff)]
     hnew[3] = h[np.argmax(diff)]
-
     return hnew
 
 for c in contours:
