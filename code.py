@@ -1,9 +1,12 @@
 import numpy as np
 import cv2
+import os
 
-image = cv2.imread('sign.jpg')
-
-nomer = 299
+cwd = os.getcwd()
+fileName = 'sign.jpg'
+image = cv2.imread(fileName)
+rsltName = fileName.rstrip(".jpg")
+ 
 widthImg = 1170                                                                      
 heightImg = 1998                                                                     
 
@@ -49,13 +52,12 @@ dstAdative = cv2.adaptiveThreshold(dst, 255, 1, 1, 23, 7) #11, 4 23, 7
 dstAdative = cv2.bitwise_not(dstAdative)
 dstAdative = cv2.medianBlur(dstAdative,3)
 cv2.imshow("test",dstAdative)
-# cv2.imwrite(f"BW-A-.png",dstAdative)
 
 final_grey = dst[5:(heightImg-5), 5:(widthImg-5)]
 final_grey = cv2.resize(final_grey, (widthImg,heightImg))
 final_img = dstAdative[5:(heightImg-5), 5:(widthImg-5)]
 final_img = cv2.resize(final_img, (widthImg,heightImg))
-# cv2.imshow("Hc",final_img)
+
 
 widthCropped = int(widthImg/3)
 heightCropped = int(heightImg/6)
@@ -63,14 +65,5 @@ countx = 1
 
 for r in range(0,final_img.shape[0],heightCropped): #Crop BW Image
     for c in range(0,final_img.shape[1],widthCropped):
-        cv2.imwrite(f"BW-A-{nomer}-{countx}.png",final_img[r+7:r+(heightCropped), c:c+widthCropped])
+        cv2.imwrite(f"BW-{rsltName}-{countx}.png",final_img[r+7:r+(heightCropped), c:c+widthCropped])
         countx = countx+1
-        if countx == 18:
-            continue
-county = 1
-for s in range(0,final_grey.shape[0],heightCropped): #Crop Grey Image
-    for t in range(0,final_grey.shape[1],widthCropped):
-        cv2.imwrite(f"Grey-A-{nomer}-{county}.png",final_grey[s:s+heightCropped, t:t+widthCropped])
-        county = county+1
-
-cv2.waitKey(0)
